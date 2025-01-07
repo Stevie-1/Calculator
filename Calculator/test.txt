@@ -1,0 +1,17 @@
+COMMON = DEBUG.h EXPRESSION_LENGTH.h Status.h
+LS = LinkedStack
+OBJS = $(LS)/LinkedList.o test.o
+Test:$(OBJS)
+	gcc $(OBJS) -o Test 
+
+test.o:test.c $(LS)/LinkedList.h
+	gcc -c test.c -o test.o
+
+$(LS)/LinkedList.o:$(LS)/LinkedList.c $(LS)/LinkedList.h $(COMMON)
+	gcc -c $(LS)/LinkedList.c -o $(LS)/LinkedList.o
+
+.PHONY:clean
+clean:
+	del $(LS)\LinkedList.o
+	del test.o
+	del Test.exe

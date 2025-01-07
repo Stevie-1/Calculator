@@ -1,0 +1,33 @@
+COMMON = DEBUG.h EXPRESSION_LENGTH.h Status.h
+
+LS = LinkedStack
+OBJS = $(LS)/LinkedList.o $(LS)/LinkedStack.o CalculatorPackage/CalculatorPackage.o FileStream/FileStream.o main.o
+
+
+
+Calculator2:$(OBJS)
+	gcc $(OBJS) -o Calculator2
+
+main.o:main.c CalculatorPackage/CalculatorPackage.h FileStream/FileStream.h
+	gcc -c main.c -o main.o 
+
+FileStream/FileStream.o:FileStream/FileStream.c FileStream/FileStream.h $(COMMON)
+	gcc -c FileStream/FileStream.c -o FileStream/FileStream.o 
+
+CalculatorPackage/CalculatorPackage.o:CalculatorPackage/CalculatorPackage.c CalculatorPackage/CalculatorPackage.h $(LS)/LinkedStack.h
+	gcc -c CalculatorPackage/CalculatorPackage.c -o CalculatorPackage/CalculatorPackage.o 
+
+$(LS)/LinkedStack.o:$(LS)/LinkedStack.c $(LS)/LinkedStack.h $(LS)/LinkedList.o
+	gcc -c $(LS)/LinkedStack.c -o $(LS)/LinkedStack.o
+
+$(LS)/LinkedList.o:$(LS)/LinkedList.c $(LS)/LinkedList.h $(COMMON)
+	gcc -c $(LS)/LinkedList.c -o $(LS)/LinkedList.o
+
+.PHONY:clean
+clean:
+	del $(LS)\LinkedList.o
+	del $(LS)\LinkedStack.o 
+	del CalculatorPackage\CalculatorPackage.o 
+	del FileStream\FileStream.o
+	del main.o
+	del Calculator2.exe

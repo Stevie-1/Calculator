@@ -1,0 +1,6 @@
+#ifndef EXPRESSION_LENGTH_H
+#define EXPRESSION_LENGTH_H
+
+#define EXPRESSION_LENGTH 50
+
+#endif
